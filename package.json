@@ -52,7 +52,7 @@
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
     "test": "npx playwright test --project chromium",
-    "test:report": "npx playwright show-report",    
+    "test:report": "npx playwright show-report",
     "docs": "lerna run build:doc --stream --scope @sites/bodiless-demo && docsify serve ./sites/bodiless-demo/doc"
   },
   "husky": {
@@ -67,6 +67,7 @@
     "cypress-failed-log": "^2.6.0",
     "debug": "^4.1.1",
     "html2canvas": "^1.0.0-rc.3",
+    "playwright": "^1.22.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "start-server-and-test": "^1.12.0",
