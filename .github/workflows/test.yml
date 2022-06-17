@@ -9,6 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
   steps:
+  
     - name: Wait for Netlify Deploy
       uses: probablyup/wait-for-netlify-action@3.2.0
       id: waitForDeployment
