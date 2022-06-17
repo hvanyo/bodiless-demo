@@ -1,53 +1,30 @@
-name: Tests
+name: Test
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [pull_request]
 
 env:
-  APPLITOOLS_API_KEY: ${{secrets.APPLITOOLS_API_KEY}}
+  DEPLOY_HOST: "spontaneous-sable-dfb1f0.netlify.app"
 
 jobs:
-  baseUrl:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - uses: './'
+
+    - name: Wait for Netlify Deploy
+      uses: fountainhead/action-wait-for-check@v1.0.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        checkName: "Pages changed"
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+    
+    - name: Storing Preview URL in Environment
+      run: echo "DEPLOY_HOST=deploy-preview-${{ github.event.pull_request.number }}--${{ env.DEPLOY_HOST }}" >> $GITHUB_ENV
+
+    - uses: colbyfayock/applitools-eyes-action@main
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
         APPLITOOLS_BATCH_ID: ${{ github.sha }}
-        appName: 'Applitools Eyes Action'
-        batchName: 'BodilessDemo'
-        baseUrl: https://main-bvxea6i-vadijmmtl4ax4.us-4.platformsh.site/
-        # ignoreSelector: '.article-list'
-        # showLogs: true
-
-  # sitemapUrl:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: './'
-  #     with:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  #       appName: 'Applitools Eyes Action'
-  #       batchName: 'Next.js WordPress Starter'
-  #       sitemapUrl: https://next-wordpress-starter.netlify.app/sitemap.xml
-
-  # concurrency:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: './'
-  #     with:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  #       appName: 'Applitools Eyes Action'
-  #       batchName: 'Next.js WordPress Starter'
-  #       sitemapUrl: https://next-wordpress-starter.netlify.app/sitemap.xml
-  #       concurrency: 20
+        appName: Demo Eyes Actions Netlify
+        baseUrl: "https://${{ env.DEPLOY_HOST }}"
+        maxDepth: 2
