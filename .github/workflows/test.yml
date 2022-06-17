@@ -28,5 +28,5 @@ jobs:
         APPLITOOLS_BATCH_ID: ${{ github.sha }}
         appName: BodilessTest
         baseUrl: "https://spontaneous-sable-dfb1f0.netlify.app/"
-        maxDepth: 2
+        maxDepth: 1
         concurrency: 3
