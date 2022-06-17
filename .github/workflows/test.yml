@@ -26,5 +26,5 @@ jobs:
         APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
         APPLITOOLS_BATCH_ID: ${{ github.sha }}
         appName: Demo Eyes Actions Netlify
-        baseUrl: "https://${{ env.DEPLOY_HOST }}"
+        baseUrl: "https://spontaneous-sable-dfb1f0.netlify.app/"
         maxDepth: 2
