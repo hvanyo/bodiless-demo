@@ -82,6 +82,12 @@ const plugins = [
   },
   {
     resolve: 'bodiless-demo',
+  },
+  {
+    resolve: 'gatsby-plugin-playwright',
+    options: {
+      viewportwidths: [640, 1024, 1280, 1536],
+    },
   }
 ];
 

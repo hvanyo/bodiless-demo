@@ -42,6 +42,7 @@
     "gatsby-plugin-canonical-urls": "^4.10.0",
     "gatsby-plugin-sitemap": "^5.10.2",
     "gatsby-plugin-google-tagmanager": "^4.13.0",
+    "gatsby-plugin-playwright": "https://github.com/hvanyo/gatsby-plugin-playwright.git",
     "glob": "^7.1.6",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
